@@ -37,4 +37,8 @@ sudo usermod -aG docker $USER
 sudo usermod -aG docker AzDevOps
 newgrp docker
 
+sudo chmod 666 /var/run/docker.sock
+sudo chgrp docker /lib/systemd/system/docker.socket
+sudo chmod g+w /lib/systemd/system/docker.socket
+
 echo "Setup completed at $(date)"
