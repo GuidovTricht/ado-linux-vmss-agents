@@ -1,16 +1,10 @@
 #!/bin/bash
-# setup.sh - Configure a web server instance for the scale set
+# setup.sh - Install and configure Docker for the scale set
 # This script runs as root on each new instance
 
 set -euo pipefail
 
-# Log everything to a file for debugging
-# exec > /var/log/setup-script.log 2>&1
 echo "Starting setup at $(date)"
-
-# Update package lists and install dependencies
-# apt-get update
-# apt-get install -y nodejs npm
 
 # Add Docker's official GPG key:
 sudo apt update
@@ -30,6 +24,7 @@ EOF
 
 sudo apt update
 
+# Install Docker Engine, CLI, and Containerd
 sudo apt -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Configure non-root user access
@@ -37,6 +32,7 @@ sudo usermod -aG docker $USER
 sudo usermod -aG docker AzDevOps
 newgrp docker
 
+# Set permissions for Docker socket and systemd unit
 sudo chmod 666 /var/run/docker.sock
 sudo chgrp docker /lib/systemd/system/docker.socket
 sudo chmod g+w /lib/systemd/system/docker.socket
