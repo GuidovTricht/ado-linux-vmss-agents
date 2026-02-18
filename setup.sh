@@ -34,6 +34,7 @@ sudo apt -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin d
 
 # Configure non-root user access
 sudo usermod -aG docker $USER
+sudo usermod -aG docker AzDevOps
 newgrp docker
 
 echo "Setup completed at $(date)"
