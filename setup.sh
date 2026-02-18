@@ -32,4 +32,9 @@ sudo apt update
 
 sudo apt -y install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
+# Configure non-root user access
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+
 echo "Setup completed at $(date)"
